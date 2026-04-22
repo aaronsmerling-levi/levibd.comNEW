@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Levi BD - פיתוח עסקי באשדוד. הקמה וניהול כרטיס עסק בגוגל (GMB)">
+    <meta name="theme-color" content="#0056b3">
+    <title>Levi BD - פיתוח עסקי באשדוד</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0056b3;
+            --secondary-blue: #e6f0fa;
+            --dark-text: #333333;
+            --light-text: #ffffff;
+            --accent-green: #25D366; /* WhatsApp Green */
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Heebo', sans-serif;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.6);
+        }
+
+        .whatsapp-float svg {
+            width: 32px;
+            height: 32px;
+            fill: white;
+        }
+
+        /* Header / Hero Section */
+        header {
+            background-color: var(--primary-blue);
+            color: var(--light-text);
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Intro Text */
+        .intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .intro h2 {
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+            font-size: 2rem;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Pricing Table */
+        .pricing-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        @media(min-width: 768px) {
+            .pricing-wrapper {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .pricing-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            flex: 1;
+            text-align: center;
+            border-top: 5px solid var(--primary-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            max-width: 300px;
+            margin: 0 auto;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .pricing-card.featured {
+            border-top: 5px solid var(--accent-green);
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.08);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+
+        .price {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+            margin-bottom: 5px;
+        }
+
+        .price-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card ul {
+            list-style-type: none;
+            margin-bottom: 30px;
+            text-align: right;
+        }
+
+        .pricing-card ul li {
+            margin-bottom: 12px;
+            padding-right: 25px;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .pricing-card ul li::before {
+            content: '✓';
+            color: var(--accent-green);
+            position: absolute;
+            right: 0;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s, transform 0.2s;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background-color: #004085;
+            transform: scale(1.02);
+        }
+
+        .btn-whatsapp {
+            background-color: var(--accent-green);
+            color: #fff;
+            margin-top: 15px;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebd57;
+            transform: scale(1.02);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-text);
+            color: var(--light-text);
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+
+        footer a {
+            color: var(--secondary-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: var(--accent-green);
+        }
+
+        .footer-btn {
+            max-width: 300px;
+            margin: 20px auto;
+        }
+
+        .copyright {
+            font-size: 0.85rem;
+            margin-top: 20px;
+            opacity: 0.8;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .intro h2 {
+                font-size: 1.5rem;
+            }
+
+            .pricing-card {
+                max-width: 100%;
+            }
+
+            .pricing-card.featured {
+                transform: scale(1.02);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/972543486821" class="whatsapp-float" target="_blank" title="צור קשר ב-WhatsApp" aria-label="Contact via WhatsApp">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.67-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421-7.403h-.004a9.87 9.87 0 00-5.031 1.378c-1.557.821-2.989 2.086-4.082 3.626C2.929 12.487 2.352 14.334 2.352 16.256c0 1.91.518 3.799 1.498 5.455l-1.594 5.933 6.087-1.568c1.554.947 3.379 1.445 5.282 1.445 5.165 0 9.377-4.383 9.377-9.769 0-2.668-.778-5.216-2.256-7.36-1.478-2.144-3.529-3.61-5.857-4.27a9.798 9.798 0 00-2.405-.308z"/>
+        </svg>
+    </a>
+
+    <header>
+        <h1>Levi BD</h1>
+        <p>מכניסים את העסק שלך למפה הדיגיטלית של אשדוד.</p>
+        <p>בלי שיחות טלפון, בלי כאב ראש. תנו לנו לעשות את העבודה.</p>
+    </header>
+
+    <div class="container">
+        <div class="intro">
+            <h2>בחרו את החבילה המתאימה לכם</h2>
+            <p>הלקוחות שלכם מחפשים אתכם בגוגל. אנחנו נדאג שהם ימצאו אתכם ראשונים.</p>
+        </div>
+
+        <div class="pricing-wrapper">
+            <div class="pricing-card">
+                <h3>הקמה בסיסית</h3>
+                <div class="price">₪399</div>
+                <div class="price-subtitle">תשלום חד-פעמי</div>
+                <ul>
+                    <li>פתיחת כרטיס עסק בגוגל (GMB)</li>
+                    <li>טיפול בתהליך האימות</li>
+                    <li>הזנת פרטים (שם, כתובת, טלפון)</li>
+                    <li>הוספת שעות פעילות מדויקות</li>
+                </ul>
+                <a href="https://wa.me/972543486821?text=שלום אהרון, אני מעוניין בחבילת ההקמה הבסיסית." class="btn btn-primary" target="_blank">הזמן עכשיו</a>
+            </div>
+
+            <div class="pricing-card featured">
+                <h3>אופטימיזציה וצמיחה</h3>
+                <div class="price">₪999</div>
+                <div class="price-subtitle">תשלום חד-פעמי</div>
+                <ul>
+                    <li><strong>כל מה שכלול בהקמה בסיסית</strong></li>
+                    <li>כתיבת תיאור עסק מותאם SEO</li>
+                    <li>העלאה וסידור של 10-15 תמונות איכותיות</li>
+                    <li>הגדרת קטגוריות ותגיות מקומיות</li>
+                    <li>יצירת 3 פוסטים ראשונים בגוגל</li>
+                </ul>
+                <a href="https://wa.me/972543486821?text=שלום אהרון, אני מעוניין בחבילת האופטימיזציה והצמיחה." class="btn btn-whatsapp" target="_blank">המלצת המערכת - להזמנה</a>
+            </div>
+
+            <div class="pricing-card">
+                <h3>ניהול שוטף (Autopilot)</h3>
+                <div class="price">₪400</div>
+                <div class="price-subtitle">לחודש</div>
+                <ul>
+                    <li>2-4 פוסטים חדשים בחודש מותאמים לחיפוש</li>
+                    <li>מענה מקצועי לכל ביקורת של לקוח</li>
+                    <li>העלאת תמונות חדשות באופן שוטף</li>
+                    <li>בניית קישורים לאתרים מקומיים באשדוד</li>
+                </ul>
+                <a href="https://wa.me/972543486821?text=שלום אהרון, אני מעוניין בניהול שוטף של כרטיס הגוגל שלי." class="btn btn-primary" target="_blank">הזמן עכשיו</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <h2>אהרון לב | Levi BD</h2>
+        <p>מנהל פיתוח עסקי (Business Development Manager)</p>
+        <p>📧 דוא"ל: <a href="mailto:aaronsmerling@levibd.com">aaronsmerling@levibd.com</a></p>
+        <p>📱 טלפון: <a href="tel:+972543486821">+972 54 348 6821</a></p>
+        
+        <a href="https://wa.me/972543486821" class="btn btn-whatsapp footer-btn" target="_blank">💬 שלח הודעת וואטסאפ</a>
+
+        <p class="copyright">&copy; 2026 Levi BD. כל הזכויות שמורות.</p>
+    </footer>
+
+</body>
+</html>
